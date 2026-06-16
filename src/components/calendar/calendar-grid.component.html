@@ -1,0 +1,36 @@
+<div class="month-block">
+
+  <div class="month-header">
+    <div class="month-title-row">
+      <div class="month-title">{{ month().name }}</div>
+      <div class="month-stats">
+        {{ (month().totalMinutes || 0) * 60 | durationMin }}
+        <span class="hours-val">
+          {{ (month().totalMinutes || 0) * 60 | durationHour }}
+        </span>
+      </div>
+    </div>
+    <div class="month-bar">
+      <app-gauge-bar [localRel]="(month().localIntensity || 0) / 255" [globalRel]="(month().intensity || 0) / 255"
+        [showGlobal]="state.showGlobalStats()" localLabel="Rel. to Best Month in Year"
+        globalLabel="Rel. to Best Month Ever"></app-gauge-bar>
+    </div>
+  </div>
+
+  <div class="calendar-grid">
+
+    @for (day of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']; track day) {
+    <div class="grid-header">
+      {{ day }}
+    </div>
+    }
+    <div class="grid-header-week">
+      Week
+    </div>
+
+    @for (cell of month().gridCells; track $index) {
+    <app-calendar-day [cell]="cell"></app-calendar-day>
+    }
+
+  </div>
+</div>

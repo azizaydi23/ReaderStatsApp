@@ -1,0 +1,263 @@
+:host {
+  display: block;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+}
+
+.table-controls {
+  padding: 8px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-wrapper {
+  position: relative;
+  max-width: 300px;
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 32px 8px 34px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #334155;
+  transition: all 0.2s;
+  background: #f8fafc;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.clear-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.clear-btn:hover {
+  color: #64748b;
+  background-color: #f1f5f9;
+}
+
+.clear-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.count-badge {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.table-container {
+  width: 100%;
+}
+
+.book-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  table-layout: fixed;
+}
+
+.book-table th {
+  text-align: left;
+  color: #64748b;
+  font-weight: 600;
+  padding: 12px 12px;
+  border-bottom: 1px solid #e2e8f0;
+
+  position: sticky;
+  top: 48px;
+  background: white;
+  z-index: 10;
+
+  white-space: nowrap;
+  user-select: none;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.book-table th.sortable {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.book-table th.sortable:hover {
+  background-color: #f8fafc;
+  color: #334155;
+}
+
+.sort-icon {
+  display: inline-block;
+  margin-left: 4px;
+  opacity: 0;
+  width: 10px;
+  transition: opacity 0.2s;
+}
+
+.sort-icon.active {
+  opacity: 1;
+  color: #3b82f6;
+}
+
+.book-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.book-table tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.book-table tr:hover td {
+  background-color: #f1f5f9;
+}
+
+.col-title {
+  width: 30%;
+}
+
+.col-date {
+  width: 12%;
+}
+
+.col-stat {
+  width: 8%;
+}
+
+.book-title-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #1e293b;
+}
+
+.title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.date-cell {
+  white-space: nowrap;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.clickable-date {
+  color: #3b82f6;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.clickable-date:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.numeric-cell {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: #475569;
+}
+
+.numeric-cell .unit {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: normal;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.hours-cell-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+
+.hours-val {
+  line-height: 1;
+}
+
+.hours-gauge {
+  width: 60px;
+  height: 4px;
+  background-color: transparent;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px !important;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .table-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-wrapper {
+    max-width: 100%;
+  }
+
+  .count-badge {
+    align-self: flex-end;
+  }
+}

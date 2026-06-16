@@ -1,0 +1,44 @@
+@if (stats(); as data) {
+<div class="stats-container">
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Total Duration</div>
+      <div class="kpi-value">{{ data.totalSeconds | durationHour }}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Books</div>
+      <div class="kpi-value">{{ data.totalBooks }}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Active Days</div>
+      <div class="kpi-value">{{ data.dailyHistory.length }}</div>
+    </div>
+  </div>
+
+  <div class="chart-card full-width">
+    <h3 class="chart-title">Reading by Month</h3>
+    <app-bar-chart [data]="data.byMonth" color="#6366f1" (barClick)="onBarClick($event)" [showTotalLabel]="true"
+      orientation="vertical" [highlightedBookId]="highlightedBookId()"
+      (segmentHover)="onBookSegmentHover($event)"></app-bar-chart>
+  </div>
+
+  <div class="chart-card full-width">
+    <h3 class="chart-title">Reading History (Daily & Cumulative)</h3>
+    <app-combo-chart [data]="data.dailyHistory" barColor="#94a3b8" lineColor="#10b981">
+    </app-combo-chart>
+  </div>
+
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3 class="chart-title">Reading by Year</h3>
+      <app-bar-chart [data]="data.byYear" color="#8b5cf6" [showTotalLabel]="true"></app-bar-chart>
+    </div>
+    <div class="chart-card">
+      <h3 class="chart-title">Weekly Habits</h3>
+      <app-bar-chart [data]="data.byWeekday" color="#f59e0b"></app-bar-chart>
+    </div>
+  </div>
+
+</div>
+}

@@ -1,0 +1,43 @@
+<header class="app-header">
+  <div class="header-content">
+    <div class="left-section">
+
+      <div class="logo-area">
+        <h1 class="app-title">Reader Stats</h1>
+        <a href="https://www.linkedin.com/in/mohamed-aziz-aydi/" target="_blank" rel="noopener noreferrer"
+          class="github-link">connect me</a>
+      </div>
+
+      @if (state.hasData()) {
+      <div class="tab-switcher">
+        <button class="tab-btn" [class.active]="state.activeTab() === 'calendar'" (click)="onTabClick('calendar')">
+          Calendar
+        </button>
+        <button class="tab-btn" [class.active]="state.activeTab() === 'stats'" (click)="onTabClick('stats')">
+          Stats
+        </button>
+        <button class="tab-btn" [class.active]="state.activeTab() === 'books'" (click)="onTabClick('books')">
+          Books
+        </button>
+        <button class="tab-btn" [class.active]="state.activeTab() === 'timeline'" (click)="onTabClick('timeline')">
+          Timeline
+        </button>
+        <button class="tab-btn" [class.active]="state.activeTab() === 'heatmap'" (click)="onTabClick('heatmap')">
+          Heatmap
+        </button>
+      </div>
+      }
+    </div>
+
+    @if (state.hasData()) {
+    <div class="header-controls">
+      <button (click)="onReset()" class="btn-reset" title="Open new database file">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
+        </svg>
+      </button>
+    </div>
+    }
+  </div>
+</header>

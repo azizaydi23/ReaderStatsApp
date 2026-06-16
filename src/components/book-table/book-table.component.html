@@ -1,0 +1,126 @@
+<div class="table-controls">
+  <div class="search-wrapper">
+    <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd"
+        d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+        clip-rule="evenodd" />
+    </svg>
+    <input type="text" class="search-input" placeholder="Search books..." [value]="searchTerm()"
+      (input)="updateSearch($event)">
+    @if (searchTerm()) {
+    <button class="clear-btn" (click)="searchTerm.set('')">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path
+          d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+      </svg>
+    </button>
+    }
+  </div>
+  <div class="count-badge">
+    {{ sortedBooks().length }} / {{ books().length }}
+  </div>
+</div>
+
+<div class="table-container">
+  <table class="book-table">
+    <thead>
+      <tr>
+        <th (click)="toggleSort('title')" class="sortable col-title">
+          Title
+          <span class="sort-icon" [class.active]="sortColumn() === 'title'">
+            {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+          </span>
+        </th>
+        <th (click)="toggleSort('firstRead')" class="sortable col-date">
+          Date From
+          <span class="sort-icon" [class.active]="sortColumn() === 'firstRead'">
+            {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+          </span>
+        </th>
+        <th (click)="toggleSort('lastRead')" class="sortable col-date">
+          Date To
+          <span class="sort-icon" [class.active]="sortColumn() === 'lastRead'">
+            {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+          </span>
+        </th>
+        <th (click)="toggleSort('activeDays')" class="sortable text-right col-stat">
+          Days Read
+          <span class="sort-icon" [class.active]="sortColumn() === 'activeDays'">
+            {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+          </span>
+        </th>
+        <th (click)="toggleSort('spanDays')" class="sortable text-right col-stat">
+          Days Total
+          <span class="sort-icon" [class.active]="sortColumn() === 'spanDays'">
+            {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+          </span>
+        </th>
+        <th (click)="toggleSort('speed')" class="sortable text-right col-stat" title="Minutes per Page">
+          Speed
+          <span class="sort-icon" [class.active]="sortColumn() === 'speed'">
+            {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+          </span>
+        </th>
+        <th (click)="toggleSort('totalSeconds')" class="sortable text-right col-stat">
+          Duration
+          <span class="sort-icon" [class.active]="sortColumn() === 'totalSeconds'">
+            {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+          </span>
+        </th>
+        <th (click)="toggleSort('totalPages')" class="sortable text-right col-stat">
+          Pages
+          <span class="sort-icon" [class.active]="sortColumn() === 'totalPages'">
+            {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (book of sortedBooks(); track book.id) {
+      <tr>
+        <td>
+          <div class="book-title-content" [title]="book.title">
+            <span class="book-dot" [style.background-color]="book.color"></span>
+            <span class="title-text">
+              {{ book.title }}
+            </span>
+          </div>
+        </td>
+
+        <td class="date-cell clickable-date" (click)="onDateClick(book.firstRead)" title="Go to calendar">
+          {{ book.firstRead | appDate }}
+        </td>
+
+        <td class="date-cell clickable-date" (click)="onDateClick(book.lastRead)" title="Go to calendar">
+          {{ book.lastRead | appDate }}
+        </td>
+
+        <td class="text-right numeric-cell">{{ book.activeDays }}</td>
+        <td class="text-right numeric-cell">{{ book.spanDays }}</td>
+        <td class="text-right numeric-cell">
+          @if (book.speed > 0) {
+          {{ book.speed | appSpeed }} <span class="unit">p/m</span>
+          } @else {
+          -
+          }
+        </td>
+        <td class="text-right numeric-cell hours-cell-content">
+          <div class="hours-val">{{ book.totalSeconds | durationHour }}</div>
+          <div class="hours-gauge">
+            <app-gauge-bar [localRel]="maxDuration() > 0 ? (book.totalSeconds / maxDuration()) : 0"
+              localLabel="Of displayed max"></app-gauge-bar>
+          </div>
+        </td>
+        <td class="text-right numeric-cell">{{ book.totalPages | appPages }}</td>
+      </tr>
+      }
+      @if (sortedBooks().length === 0) {
+      <tr>
+        <td colspan="8" class="empty-state">
+          No books found matching "{{ searchTerm() }}"
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

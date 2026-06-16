@@ -1,0 +1,10 @@
+<div class="view-container">
+  <div class="chart-card">
+    <h3 class="chart-title">Book Reading Timeline</h3>
+    @if (allBooks().length > 0) {
+    <app-gantt-chart [books]="allBooks()" [dailyStats]="rawStats()"></app-gantt-chart>
+    } @else {
+    <p>No book data available to display timeline.</p>
+    }
+  </div>
+</div>

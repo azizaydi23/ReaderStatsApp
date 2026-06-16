@@ -1,0 +1,69 @@
+:host {
+  display: block;
+}
+
+.month-block {
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.month-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.month-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.month-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.month-stats {
+  font-size: 13px;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.month-stats .hours-val {
+  color: #6366f1;
+  margin-left: 4px;
+}
+
+.month-bar {
+  width: 100%;
+  height: 4px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr) 50px;
+  gap: 4px;
+  width: 100%;
+}
+
+.grid-header {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+}
+
+.grid-header-week {
+  text-align: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  border-left: 1px solid #e2e8f0;
+}

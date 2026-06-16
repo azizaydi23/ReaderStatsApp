@@ -1,0 +1,76 @@
+.global-tooltip {
+  position: fixed;
+  background-color: rgba(15, 23, 42, 0.98);
+  color: white;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: opacity 0.1s ease;
+
+  max-width: 260px;
+  white-space: normal;
+  word-wrap: break-word;
+
+  top: 0;
+  left: 0;
+}
+
+.global-tooltip.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+:host ::ng-deep .tt-header {
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+:host ::ng-deep .tt-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+:host ::ng-deep .tt-title {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+:host ::ng-deep .tt-grid {
+  display: grid;
+  grid-template-columns: max-content auto;
+  column-gap: 16px;
+  row-gap: 3px;
+  font-size: 11px;
+  align-items: baseline;
+}
+
+:host ::ng-deep .tt-label {
+  color: #94a3b8;
+}
+
+:host ::ng-deep .tt-val {
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+:host ::ng-deep .tt-empty-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: #94a3b8;
+}
+
+:host ::ng-deep .tt-empty-sub {
+  font-size: 11px;
+  color: #cbd5e1;
+}

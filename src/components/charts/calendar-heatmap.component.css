@@ -1,0 +1,34 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.heatmap-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  position: relative;
+}
+
+.chart-container {
+  display: inline-block;
+  min-width: 100%;
+  position: relative;
+}
+
+:host ::ng-deep .hm-year-label {
+  font-size: 12px;
+  font-weight: bold;
+  fill: #334155;
+}
+
+:host ::ng-deep .hm-day-label {
+  font-size: 9px;
+  fill: #94a3b8;
+  text-anchor: end;
+}
+
+:host ::ng-deep .hm-month-label {
+  font-size: 10px;
+  font-weight: 600;
+  fill: #64748b;
+}

@@ -1,0 +1,74 @@
+@if (cell().type === 'empty') {
+<div class="cell-empty"></div>
+}
+
+@if (cell().type === 'day' || cell().type === 'padding-day') {
+<div class="day-cell" [class.padding-day]="cell().type === 'padding-day'" [class.has-data]="hasBooks()">
+
+  <div class="day-number">
+    <span class="day-num-val">{{ cell().dayNum }}</span>
+
+    <div class="day-meta-right">
+      @if (hasBooks()) {
+      <div class="cell-gauge-wrapper">
+        <app-gauge-bar [localRel]="(cell().localIntensity || 0) / 255" [globalRel]="(cell().intensity || 0) / 255"
+          [showGlobal]="state.showGlobalStats()" localLabel="Rel. to Best Day in Month"
+          globalLabel="Rel. to Best Day Ever"></app-gauge-bar>
+      </div>
+      }
+      @if (shouldShowMinutes()) {
+      <span class="day-total-min">{{ (cell().totalMinutes || 0) * 60 | durationMin }}</span>
+      }
+    </div>
+  </div>
+
+  @if (hasBooks()) {
+  <div class="book-list">
+    @for (stat of cell().books; track stat.book.id) {
+    <div class="book-entry-wrapper">
+      <div class="book-entry" [style.background-color]="stat.book.color" (mouseenter)="onBookHover($event, stat)"
+        (mousemove)="onBookHover($event, stat)" (mouseleave)="onBookLeave()">
+        <span class="book-title">{{ stat.book.title }}</span>
+        <span class="book-time">{{ stat.displayMinutes * 60 | durationMin }}</span>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>
+}
+
+@if (cell().type === 'week-total') {
+<div class="week-total-cell" [class.is-split]="cell().fullWeekMinutes !== undefined"
+  [class.dim-stats]="(cell().fullWeekMinutes ?? cell().totalMinutes ?? 0) === 0">
+
+  @if ((cell().fullWeekMinutes ?? cell().totalMinutes ?? 0) > 0) {
+  <div class="week-gauge-wrapper">
+    <app-gauge-bar [localRel]="(cell().localIntensity || 0) / 255" [globalRel]="(cell().intensity || 0) / 255"
+      [showGlobal]="state.showGlobalStats()" localLabel="Rel. to Best Week in Month"
+      globalLabel="Rel. to Best Week Ever"></app-gauge-bar>
+  </div>
+  }
+
+  @if (cell().fullWeekMinutes !== undefined) {
+  <div class="split-week-data">
+    <div class="sw-group">
+      <span class="sw-val">{{ (cell().fullWeekMinutes || 0) * 60 | durationMin }}</span>
+      <span class="sw-hr">{{ (cell().fullWeekMinutes || 0) * 60 | durationHour }}</span>
+    </div>
+
+    <div class="sw-divider"></div>
+
+    <div class="sw-group sw-group-dim">
+      <span class="sw-val">{{ (cell().totalMinutes || 0) * 60 | durationMin }}</span>
+      <span class="sw-hr">{{ (cell().totalMinutes || 0) * 60 | durationHour }}</span>
+    </div>
+  </div>
+  } @else {
+  <div class="week-normal-group">
+    <span class="week-total-value">{{ (cell().totalMinutes || 0) * 60 | durationMin }}</span>
+    <span class="week-total-hours">{{ (cell().totalMinutes || 0) * 60 | durationHour }}</span>
+  </div>
+  }
+</div>
+}

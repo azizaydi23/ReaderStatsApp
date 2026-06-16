@@ -1,0 +1,56 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.chart-drawing-area {
+  width: 100%;
+  position: relative;
+  overflow: visible;
+}
+
+:host ::ng-deep .axis text {
+  fill: #64748b;
+  font-size: 11px;
+}
+
+:host ::ng-deep .y-axis-label {
+  font-weight: 500;
+  fill: #334155;
+  cursor: default;
+}
+
+:host ::ng-deep .axis path,
+:host ::ng-deep .axis line {
+  stroke: #e2e8f0;
+}
+
+:host ::ng-deep .y-axis path {
+  display: none;
+}
+
+:host ::ng-deep .grid line {
+  stroke: #f1f5f9;
+}
+
+:host ::ng-deep .grid path {
+  display: none;
+}
+
+:host ::ng-deep .tooltip-rect {
+  cursor: pointer;
+}
+
+:host ::ng-deep .book-group:hover .gantt-bar,
+:host ::ng-deep .book-group:hover .activity-block {
+  filter: brightness(1.1);
+}
+
+:host ::ng-deep .activity-block {
+  pointer-events: none;
+}

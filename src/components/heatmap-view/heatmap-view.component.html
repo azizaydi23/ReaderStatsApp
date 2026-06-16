@@ -1,0 +1,6 @@
+<div class="view-container">
+  <div class="chart-card">
+    <h3 class="chart-title">Reading Frequency</h3>
+    <app-calendar-heatmap [data]="dailyHistory()" (cellClick)="onDateClick($event)"></app-calendar-heatmap>
+  </div>
+</div>

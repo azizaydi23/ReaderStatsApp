@@ -1,0 +1,37 @@
+<div class="app-container">
+
+  <app-nav-bar></app-nav-bar>
+
+  @if (state.hasData()) {
+  <div class="content-wrapper">
+
+    @switch (state.activeTab()) {
+    @case ('calendar') {
+    <app-calendar-view></app-calendar-view>
+    }
+    @case ('stats') {
+    <app-stats-view></app-stats-view>
+    }
+    @case ('books') {
+    <app-books-view></app-books-view>
+    }
+    @case ('timeline') {
+    <app-timeline-view></app-timeline-view>
+    }
+    @case ('heatmap') {
+    <app-heatmap-view></app-heatmap-view>
+    }
+    }
+
+  </div>
+  }
+
+  @if (state.showUploadModal()) {
+  <div class="modal-backdrop">
+    <app-file-upload [error]="state.error()" [canCancel]="state.hasData()" (fileSelected)="onFileSelected($event)"
+      (loadExample)="onLoadExample()" (cancel)="onCloseUploadModal()"></app-file-upload>
+  </div>
+  }
+
+  <app-chart-tooltip></app-chart-tooltip>
+</div>

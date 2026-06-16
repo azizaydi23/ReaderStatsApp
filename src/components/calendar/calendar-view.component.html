@@ -1,0 +1,82 @@
+@if (state.currentMonthData(); as month) {
+<div class="calendar-tab-container">
+
+  <div class="calendar-controls-wrapper">
+    <button class="history-back-btn" (click)="onBack()" [disabled]="!state.canGoBack()" title="Go Back">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+      </svg>
+    </button>
+
+    <div class="nav-container">
+      <nav class="compact-nav">
+        <button class="nav-btn" (click)="onJumpStart()" [disabled]="!state.hasPrev()" title="Jump to Start">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+          </svg>
+        </button>
+
+        <button class="nav-btn" (click)="onNavigate(-1)" [disabled]="!state.hasPrev()" title="Previous Month">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z"
+              clip-rule="evenodd" />
+          </svg>
+        </button>
+
+        <div class="nav-selectors">
+          @if (state.currentYearData(); as yearData) {
+          <div class="select-wrapper">
+            <select class="nav-select" (change)="onMonthChange($event)">
+              @for (m of yearData.months; track m.name; let i = $index) {
+              <option [value]="i" [selected]="i === state.viewState()?.monthIndex">
+                {{ m.name.split(' ')[0] }}
+              </option>
+              }
+            </select>
+          </div>
+          }
+
+          <div class="select-wrapper">
+            <select class="nav-select year-select" (change)="onYearChange($event)">
+              @for (y of state.yearsData(); track y.year) {
+              <option [value]="y.year" [selected]="y.year === state.viewState()?.year">
+                {{ y.year }}
+              </option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <button class="nav-btn" (click)="onNavigate(1)" [disabled]="!state.hasNext()" title="Next Month">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z"
+              clip-rule="evenodd" />
+          </svg>
+        </button>
+
+        <button class="nav-btn" (click)="onJumpEnd()" [disabled]="!state.hasNext()" title="Jump to End">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+
+    <label class="toggle-control">
+      <input type="checkbox" [checked]="state.showGlobalStats()" (change)="onToggleGlobal($event)">
+      <span class="toggle-label">Global Stats</span>
+    </label>
+  </div>
+
+  <app-calendar-grid [month]="month"></app-calendar-grid>
+
+  @if (state.currentMonthBooks().length > 0) {
+  <app-book-table [books]="state.currentMonthBooks()"></app-book-table>
+  }
+</div>
+}
