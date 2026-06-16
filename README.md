@@ -1,6 +1,6 @@
-# KoReaderStatsApp
+# ReaderStatsApp
 
-KoReader Stats
+Reader Stats
 
 Angular
 
